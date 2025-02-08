@@ -53,6 +53,7 @@ class RAG:
                     vecs = vectorDb.search(input, self.k)
                     # 将这一条数据的text作为示例输入，这一条数据的label作为示例输出
                     example_input, example_ouput = json_util.exratct(vecs[0])
+                    example_ouput = json.dumps(example_ouput, ensure_ascii=False)
 
                     # 拼接Prompt提示词，调用大模型得到结果，将输出结果保存到文件
                     system_prompt = "你现在是一个命名实体识别任务识别者，你需要识别出文本中的命名实体。"
@@ -81,9 +82,8 @@ if __name__ == '__main__':
     # RAG(logger).process_single("据报告，违规单位南京华讯电子科技有限公司在生产中使用劣质电路板，导致设备短路起火，烧毁厂房面积约500平方米。")
 
 
-    RAG(logger).process_muti('./data/train.txt')
     try:
-        RAG(logger).process_muti('./data/dev.txt')
+        RAG(logger).process_muti('./data/train.txt')
     except Exception as e:
         logger.info("调用大模型失败，error:{}".format(e))
 

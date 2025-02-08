@@ -51,7 +51,7 @@ class VectorDB:
         results = self.db.similarity_search(query, k=k)
         res = []# 返回前3个相似句子
         for doc in results:
-            print(doc.page_content)
+            # print(doc.page_content)
             res.append(doc.page_content)
         return res
 
