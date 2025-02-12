@@ -67,7 +67,7 @@ class RAG:
                     for model in ["Qwen"]:
                         try:
                             result = LLMFactory.call(model, system_prompt, user_prompt, self.logger)
-                            res["res_"+model] = result
+                            res["res_"+model] = json.loads(result)
                         except Exception as e:
                             self.logger.info("调用大模型失败，input:{},model_name:{},error:{}".format(input,model,e))
 
